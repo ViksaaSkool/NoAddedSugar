@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Added Sugar</title>
+  <meta name="description" content="No Added Sugar is a software studio where strong ideas become well-crafted digital products.">
+  <meta property="og:title" content="No Added Sugar">
+  <meta property="og:description" content="A software studio where ideas matter more and well-crafted products come to life.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="asset/no_sugar_added_icon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="No Added Sugar">
+  <meta name="twitter:description" content="A software studio where ideas matter more and well-crafted products come to life.">
+  <meta name="twitter:image" content="asset/no_sugar_added_icon.png">
+  <link rel="icon" href="asset/no_sugar_added_icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+  <header>
+    <nav>
+      <a href="#intro" class="logo">
+        <img class="logo-light" src="asset/no_added_sugar_title_light.png" alt="No Added Sugar" width="260" height="64">
+        <img class="logo-dark" src="asset/no_added_sugar_dark.png" alt="No Added Sugar" width="260" height="64">
+      </a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h1>Software Studio.<br>Ideas come to life.</h1>
+      <p><span id="console-text"></span><span id="console-cursor">&nbsp;</span></p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-layout">
+        <div id="projects-copy" class="projects-copy">
+          <p class="projects-kicker">Selected Project</p>
+          <h3 id="project-title">brajko.cloud</h3>
+          <p id="project-description">
+            A studio experiment in turning personality into product presence. Clean delivery, distinct voice, and a sharp visual shell around a simple idea.
+          </p>
+        </div>
+        <figure id="projects-visual" class="projects-visual" aria-label="Project monitor">
+          <img class="projects-base" src="asset/monitor_projects.svg" alt="Project monitor" loading="lazy">
+          <div class="project-screen-frame" aria-hidden="true">
+            <div class="project-static"></div>
+            <img
+              id="project-screen"
+              class="project-screen"
+              src="asset/brajko_cloud.png"
+              alt="Selected project preview"
+              loading="lazy"
+            >
+          </div>
+          <div class="project-controls" aria-label="Project navigation">
+            <button id="project-prev" class="project-control project-control-prev" type="button" aria-label="Previous project">
+              <img src="asset/left_button.svg" alt="" aria-hidden="true">
+            </button>
+            <button id="project-next" class="project-control project-control-next" type="button" aria-label="Next project">
+              <img src="asset/right_arrow.svg" alt="" aria-hidden="true">
+            </button>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-layout">
+        <div class="contact-form-wrap">
+          <div class="contact-intro">
+            <p class="contact-kicker">Start A Project</p>
+            <h3>Bring the idea. We can shape the product.</h3>
+            <p class="contact-lead">
+              Early concept, prototype, internal tool, AI feature, full build. Use the form and keep it rough.
+            </p>
+          </div>
+          <form id="contact-form" action="https://formsubmit.co/contact@noaddedsugar.tech" method="POST">
+            <input type="hidden" name="_subject" value="New message from No Added Sugar site">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <div class="contact-topics" aria-label="Project type">
+              <span class="topic-pill">New product</span>
+              <span class="topic-pill">Prototype</span>
+              <span class="topic-pill">AI feature</span>
+              <span class="topic-pill">Consulting</span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="name@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What are you building?" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="A few lines are enough. Goal, context, timeline, or current mess." required></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit">Send message</button>
+              <p class="form-note">Direct to contact@noaddedsugar.tech</p>
+            </div>
+          </form>
+        </div>
+        <div class="contact-info">
+          <div class="contact-card">
+            <p class="contact-card-kicker">Studio Status</p>
+            <p class="contact-card-line"><strong>Email</strong><span>contact@noaddedsugar.tech</span></p>
+            <p class="contact-card-line"><strong>Location</strong><span>Skopje, Macedonia</span></p>
+            <p class="contact-card-line"><strong>Response</strong><span>Usually within 1-2 business days</span></p>
+            <p class="contact-card-copy">Small studio. Direct communication. Fast iteration.</p>
+          </div>
+          <div class="contact-map-wrap">
+            <p class="contact-map-label">Skopje, Macedonia</p>
+            <div id="map"></div>
+          </div>
+          <div class="social-links" aria-label="Social links">
+            <a href="https://www.linkedin.com/company/noaddedsugar" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/noaddedsugar" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.649.5.5 5.649.5 12a11.5 11.5 0 0 0 7.863 10.92c.575.106.787-.25.787-.556 0-.274-.01-1-.016-1.962-3.2.696-3.875-1.543-3.875-1.543-.523-1.328-1.277-1.682-1.277-1.682-1.044-.714.079-.699.079-.699 1.154.081 1.761 1.185 1.761 1.185 1.026 1.758 2.692 1.25 3.348.956.104-.743.401-1.25.729-1.538-2.554-.291-5.239-1.277-5.239-5.685 0-1.256.449-2.283 1.184-3.088-.119-.291-.513-1.462.112-3.048 0 0 .966-.309 3.167 1.179a10.94 10.94 0 0 1 5.766 0c2.2-1.488 3.165-1.179 3.165-1.179.627 1.586.233 2.757.114 3.048.737.805 1.183 1.832 1.183 3.088 0 4.419-2.689 5.391-5.252 5.676.412.355.779 1.055.779 2.127 0 1.536-.014 2.775-.014 3.153 0 .309.207.668.793.554A11.502 11.502 0 0 0 23.5 12C23.5 5.649 18.351.5 12 .5z"/></svg>
+            </a>
+            <a href="https://x.com/noaddedsugar" target="_blank" rel="noopener" class="social-link" aria-label="X">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.154h3.681l-8.042 9.19 9.461 12.502h-7.406l-5.8-7.582-6.633 7.582H.48l8.602-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.293 19.488h2.04L6.486 3.24H4.298l13.31 17.402z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>No Added Sugar. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="projects-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
