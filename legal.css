@@ -1,0 +1,91 @@
+:root {
+  --bg: #050505;
+  --bg-alt: #111111;
+  --text: #f4f1ea;
+  --text-muted: #ada79c;
+  --border: rgba(255, 255, 255, 0.14);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f2e8;
+    --bg-alt: #fffaf1;
+    --text: #181512;
+    --text-muted: #5d554c;
+    --border: rgba(24, 21, 18, 0.14);
+    --border-subtle: rgba(24, 21, 18, 0.08);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  margin-top: 2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+p,
+li {
+  color: var(--text);
+}
+
+.lede,
+.meta {
+  color: var(--text-muted);
+}
+
+section {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 1.5rem;
+}
+
+ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+strong {
+  color: var(--text);
+}
