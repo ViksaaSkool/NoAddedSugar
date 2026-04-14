@@ -80,11 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var projectTitle = document.getElementById("project-title");
   var projectDescription = document.getElementById("project-description");
-  var projectScreen = document.getElementById("project-screen");
+  var projectImage = document.getElementById("project-image");
   var projectPrev = document.getElementById("project-prev");
   var projectNext = document.getElementById("project-next");
   var projectsCopy = document.getElementById("projects-copy");
-  var projectScreenFrame = document.querySelector(".project-screen-frame");
+  var projectsVisual = document.getElementById("projects-visual");
+  var projectHotspots = document.querySelectorAll(".projects-hotspot");
   var isProjectSwitching = false;
 
   var projects = Array.isArray(window.PROJECTS) ? window.PROJECTS : [];
@@ -94,11 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderProject(index) {
     var project = projects[index];
     projectTitle.textContent = project.title;
-    projectDescription.textContent = project.description;
-    projectScreen.src = project.image;
-    projectScreen.alt = project.title + " preview";
-    projectScreen.style.setProperty("--project-fit", project.fit || "contain");
-    projectScreen.style.setProperty("--project-position", project.position || "center center");
+    projectDescription.innerHTML = project.description || "";
+    projectImage.src = project.image;
+    projectImage.alt = project.title + " preview";
+    projectImage.style.setProperty("--project-fit", project.fit || "contain");
+    projectImage.style.setProperty("--project-position", project.position || "center center");
   }
 
   function stepProject(direction) {
@@ -108,16 +109,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     isProjectSwitching = true;
     projectIndex = (projectIndex + direction + projects.length) % projects.length;
-    projectScreen.classList.add("is-switching");
+    projectImage.classList.add("is-switching");
     projectsCopy.classList.add("is-switching");
-    projectScreenFrame.classList.add("is-switching");
 
     setTimeout(function () {
       renderProject(projectIndex);
       requestAnimationFrame(function () {
-        projectScreen.classList.remove("is-switching");
+        projectImage.classList.remove("is-switching");
         projectsCopy.classList.remove("is-switching");
-        projectScreenFrame.classList.remove("is-switching");
       });
       setTimeout(function () {
         isProjectSwitching = false;
@@ -128,11 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (
     projectTitle &&
     projectDescription &&
-    projectScreen &&
+    projectImage &&
     projectPrev &&
     projectNext &&
-    projectsCopy &&
-    projectScreenFrame
+    projectsCopy
   ) {
     if (projects.length > 0) {
       renderProject(projectIndex);
@@ -144,6 +142,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
     projectNext.addEventListener("click", function () {
       stepProject(1);
+    });
+  }
+
+  if (projectsVisual && projectHotspots.length > 0) {
+    Array.prototype.forEach.call(projectHotspots, function (hotspot) {
+      hotspot.addEventListener("mouseenter", function () {
+        projectsVisual.classList.add("is-hotspot-hovered");
+        projectsCopy.classList.add("is-hotspot-hovered");
+      });
+
+      hotspot.addEventListener("mouseleave", function () {
+        projectsVisual.classList.remove("is-hotspot-hovered");
+        projectsCopy.classList.remove("is-hotspot-hovered");
+      });
+    });
+  }
+
+  var legalDialog = document.getElementById("legal-dialog");
+  var legalDialogFrame = document.getElementById("legal-dialog-frame");
+  var legalDialogClose = document.getElementById("legal-dialog-close");
+  var legalDialogTitle = document.getElementById("legal-dialog-title");
+  var legalLinks = document.querySelectorAll("[data-legal-link]");
+
+  function closeLegalDialog() {
+    if (legalDialog && legalDialog.open) {
+      legalDialog.close();
+      legalDialogFrame.src = "about:blank";
+    }
+  }
+
+  if (legalDialog && legalDialogFrame && legalDialogClose && legalDialogTitle && legalLinks.length > 0) {
+    Array.prototype.forEach.call(legalLinks, function (link) {
+      link.addEventListener("click", function (event) {
+        var target = link.getAttribute("data-legal-link");
+        var label = link.textContent;
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+        legalDialogTitle.textContent = label;
+        legalDialogFrame.src = target;
+        legalDialog.showModal();
+      });
+    });
+
+    legalDialogClose.addEventListener("click", function () {
+      closeLegalDialog();
+    });
+
+    legalDialog.addEventListener("click", function (event) {
+      if (event.target === legalDialog) {
+        closeLegalDialog();
+      }
+    });
+
+    legalDialog.addEventListener("close", function () {
+      legalDialogFrame.src = "about:blank";
     });
   }
 });
