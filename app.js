@@ -235,14 +235,14 @@ document.addEventListener("DOMContentLoaded", function () {
     contactForm.addEventListener("submit", function (event) {
       var submitButton = contactForm.querySelector("button[type=\"submit\"]");
       var formData = new FormData(contactForm);
-      var action = contactForm.getAttribute("action") || "";
-      var ajaxAction = action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+      var endpoint = contactForm.getAttribute("data-endpoint") || "";
 
       event.preventDefault();
+      event.stopPropagation();
 
-      if (!ajaxAction) {
+      if (!endpoint) {
         openFormDialog("Message error", "The form endpoint is missing. Please email contact@noaddedsugar.dev instead.");
-        return;
+        return false;
       }
 
       if (submitButton) {
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
         submitButton.textContent = "Sending...";
       }
 
-      fetch(ajaxAction, {
+      fetch(endpoint, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -277,6 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
             submitButton.textContent = "Send message";
           }
         });
-    });
+      return false;
+    }, true);
   }
 });
