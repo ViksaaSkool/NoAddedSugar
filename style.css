@@ -533,14 +533,6 @@ section {
   color: var(--text-muted);
 }
 
-.honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
 #contact-form button {
   padding: 1rem 1.4rem;
   background: var(--btn-bg);
