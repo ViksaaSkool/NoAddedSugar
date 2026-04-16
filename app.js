@@ -164,6 +164,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var legalDialogClose = document.getElementById("legal-dialog-close");
   var legalDialogTitle = document.getElementById("legal-dialog-title");
   var legalLinks = document.querySelectorAll("[data-legal-link]");
+  var contactForm = document.getElementById("contact-form");
+  var formDialog = document.getElementById("form-dialog");
+  var formDialogClose = document.getElementById("form-dialog-close");
+  var formDialogTitle = document.getElementById("form-dialog-title");
+  var formDialogMessage = document.getElementById("form-dialog-message");
 
   function closeLegalDialog() {
     if (legalDialog && legalDialog.open) {
@@ -201,6 +206,77 @@ document.addEventListener("DOMContentLoaded", function () {
 
     legalDialog.addEventListener("close", function () {
       legalDialogFrame.src = "about:blank";
+    });
+  }
+
+  function openFormDialog(title, message) {
+    if (!formDialog || !formDialogTitle || !formDialogMessage) {
+      return;
+    }
+
+    formDialogTitle.textContent = title;
+    formDialogMessage.textContent = message;
+    formDialog.showModal();
+  }
+
+  if (formDialog && formDialogClose) {
+    formDialogClose.addEventListener("click", function () {
+      formDialog.close();
+    });
+
+    formDialog.addEventListener("click", function (event) {
+      if (event.target === formDialog) {
+        formDialog.close();
+      }
+    });
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+      var submitButton = contactForm.querySelector("button[type=\"submit\"]");
+      var formData = new FormData(contactForm);
+      var action = contactForm.getAttribute("action") || "";
+      var ajaxAction = action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+
+      event.preventDefault();
+
+      if (!ajaxAction) {
+        openFormDialog("Message error", "The form endpoint is missing. Please email contact@noaddedsugar.dev instead.");
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      fetch(ajaxAction, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Request failed");
+          }
+
+          return response.json();
+        })
+        .then(function () {
+          contactForm.reset();
+          openFormDialog("Message sent", "Thanks. Your message was sent successfully and the page did not redirect.");
+        })
+        .catch(function () {
+          openFormDialog("Message error", "The message could not be sent right now. Please try again or email contact@noaddedsugar.dev directly.");
+        })
+        .finally(function () {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Send message";
+          }
+        });
     });
   }
 });
