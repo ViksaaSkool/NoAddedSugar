@@ -93,6 +93,7 @@
             <input type="hidden" name="_subject" value="New message from No Added Sugar site">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
             <div class="contact-topics" aria-label="Project type">
               <span class="topic-pill">New product</span>
               <span class="topic-pill">Prototype</span>
@@ -168,6 +169,18 @@
         title="Legal document"
         loading="lazy"
       ></iframe>
+    </div>
+  </dialog>
+
+  <dialog id="form-dialog" class="form-dialog" aria-labelledby="form-dialog-title">
+    <div class="form-dialog-shell">
+      <div class="form-dialog-header">
+        <p id="form-dialog-title" class="form-dialog-title">Message status</p>
+        <button id="form-dialog-close" class="legal-dialog-close" type="button" aria-label="Close message dialog">Close</button>
+      </div>
+      <div class="form-dialog-body">
+        <p id="form-dialog-message"></p>
+      </div>
     </div>
   </dialog>
 
