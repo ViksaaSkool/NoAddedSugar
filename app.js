@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(function () {
           contactForm.reset();
-          openFormDialog("Message sent", "Thanks. Your message was sent successfully and the page did not redirect.");
+          openFormDialog("Message sent", "Thanks. Your message was sent successfully!");
         })
         .catch(function () {
           openFormDialog("Message error", "The message could not be sent right now. Please try again or email contact@noaddedsugar.dev directly.");
