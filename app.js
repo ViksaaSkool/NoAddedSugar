@@ -4,9 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     zoomControl: false,
   }).setView([41.9981, 21.4254], 13);
 
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-    maxZoom: 19,
+  var CARTO_KEY = window.CARTO_KEY || "cb1_3mcy_1_f09307d2f327c633a3ad9c80";
+  var CARTO_TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=" + CARTO_KEY;
+
+  L.tileLayer(CARTO_TILE_URL, {
+    attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
+    subdomains: "abcd",
+    maxZoom: 20,
   }).addTo(map);
 
   L.control.zoom({ position: "bottomright" }).addTo(map);
