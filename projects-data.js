@@ -21,5 +21,13 @@ window.PROJECTS = [
     position: "center center",
     description:
       "Soundboard of Brajko, one of the aliases used by <a href=\"https://en.wikipedia.org/wiki/Yugoslavia\">ex-yu</a> region <a href=\"https://www.tiktok.com/@dragoslavstanoje8\">most famous</a> as TikToker. In the Balkans, Tiktok doesn't support creators program, so the goal is to put the Tiktok-to-web page revenue route to the test. Tiktok users from a viral account are enocouraged to visit the soundboard page, act that is monitizable. Want to see the soundboard?\nHere: <a href=\"https://brajko.cloud\">brajko.cloud</a>",
-  }  
+  },  
+  {
+    title: "Shweep",
+    image: "asset/projects/shweep.png",
+    fit: "contain",
+    position: "center center",
+    description:
+      "Shweep turns the classic sheep-counting ritual into a gentle bedtime wind-down for your phone. Instead of doom-scrolling until 2 a.m., flick a soft little flock into a moonlit meadow and let the day drift away — literally.\n<a href=\"https://www.shweep.lol//\">Visit shweep.lol</a>",
+  },
 ];
